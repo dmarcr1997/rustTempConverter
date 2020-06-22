@@ -2,7 +2,7 @@ use std::io;
 fn main() {
     let mut choice = 'y';
     loop{
-        println!("Hello, Would You Like to convert To Fahrenheit or Celcius(F/C):");
+        println!("Hello, Would You Like to convert to Fahrenheit or Celcius(F/C):");
         let mut tempType = String::new();
         io::stdin()
             .read_line(&mut tempType)
@@ -14,7 +14,7 @@ fn main() {
             .read_line(&mut temp)
             .expect("Failed to read line");
         let temp: f32 = temp.trim().parse().expect("Please type a number!");
-        println!("Your new Temperature is: {:.2}", convert(tempType, temp));
+        println!("Your new Temperature is: {:.2}{}", convert(&tempType, temp), tempType);
         println!("Would You like to convert again(y/n): ");
         let mut choice = String::new();
         io::stdin()
@@ -28,8 +28,8 @@ fn main() {
     println!("Thank You For using my converter!")
 }
 
-fn convert(tempT: char, temp: f32) -> f32{
-    if tempT == 'F'{
+fn convert(tempT: &char, temp: f32) -> f32{
+    if *tempT == 'C'{
         return (temp - 32.0) * (0.55555555555555555555555555555556);
     }
     else{
